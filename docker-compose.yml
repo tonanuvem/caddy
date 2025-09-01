@@ -6,7 +6,7 @@ services:
       - 8443:443/tcp
       - 8443:443/udp
     environment:
-      - CADDY_INGRESS_NETWORKS=caddy
+      - CADDY_INGRESS_NETWORKS=caddymanager
     networks:
       - caddymanager
     restart: unless-stopped
@@ -15,12 +15,12 @@ services:
       - caddy_data:/data
     restart: unless-stopped
     
-  whoami:
-    image: traefik/whoami
+  page:
+    image: tonanuvem/fiap_page
     networks:
       - caddymanager
     labels:
-      caddy: whoami.vm.aluno.lab.tonanuvem.com
+      caddy: page.vm.aluno.lab.tonanuvem.com
       caddy.reverse_proxy: "{{upstreams 80}}"
 
 
@@ -51,8 +51,8 @@ services:
       - MONGODB_URI=mongodb://mongoadmin:someSecretPassword@mongodb:27017/caddymanager?authSource=admin
       - CORS_ORIGIN=http://caddy:5173
       - LOG_LEVEL=debug
-      - DEFAULT_CADDY_ADMIN_USER=admin
-      - DEFAULT_CADDY_ADMIN_PASSWORD=caddyrocks
+      - DEFAULT_CADDY_ADMIN_USER=fiap
+      - DEFAULT_CADDY_ADMIN_PASSWORD=fiap
       - CADDY_SANDBOX_URL=http://caddy:2019
       - PING_INTERVAL=30000
       - PING_TIMEOUT=2000
@@ -77,7 +77,7 @@ services:
       - APP_NAME=Caddy Manager
       - DARK_MODE=true
     ports:
-      - "80:80"  # Expose web UI
+      - "8888:80"  # Expose web UI
     networks:
       - caddymanager
 
