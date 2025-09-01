@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Lista todos os yml e baixa cada um
+ls *.yml | while read yml; do
+  echo "Removendo projeto: $yml"
+  docker-compose -f $yml stop && docker-compose -f $yml rm -f
+done
+echo ""
+docker volume prune -f && git pull
+
+echo ""
+echo "Removendo volumes:"
+echo ""
+# Lista todos os volumes e remove cada um
+docker volume ls -q | grep caddy | while read volume; do
+  #echo "Removendo volume: $volume"
+  docker volume rm "$volume"
+done
+echo ""
+
+#docker network rm caddy
