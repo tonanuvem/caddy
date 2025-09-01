@@ -15,3 +15,7 @@
 ## Caddy Manager:
 
 > https://github.com/caddymanager/caddymanager
+
+## Extra : Caddy Gen
+
+> https://github.com/DeanWard/CaddyGen
