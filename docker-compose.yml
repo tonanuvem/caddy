@@ -9,7 +9,6 @@ services:
       - CADDY_INGRESS_NETWORKS=caddymanager
     networks:
       - caddymanager
-    restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - caddy_data:/data
