@@ -35,9 +35,9 @@ services:
         - 8880:8000/tcp
       environment:
         - CADDY_API_ENDPOINT=http://caddy:2019
-    networks:
-      - caddymanager
-    restart: unless-stopped
+      networks:
+        - caddymanager
+      restart: unless-stopped
       
 ###### Caddy Manager
 
