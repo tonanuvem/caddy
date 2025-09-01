@@ -8,6 +8,10 @@
 
 > https://github.com/lucaslorentz/caddy-docker-proxy
 
+## Caddy UI:
+
+> https://github.com/qdm12/caddy-ui
+
 ## Caddy Manager:
 
 > https://github.com/caddymanager/caddymanager
