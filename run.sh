@@ -4,6 +4,12 @@ docker ps -q | xargs -r docker stop
 echo ""
 echo "Todos os containers foram parados."
 
+echo ""
+echo "Parando o apache..."
+sudo systemctl stop httpd
+echo ""
+echo "Os servicos apache/httpd foram parados."
+
 
 ### EXECUTAR CADDY
 
