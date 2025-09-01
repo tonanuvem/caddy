@@ -48,7 +48,8 @@ services:
     environment:
       - PORT=3000
       - MONGODB_URI=mongodb://mongoadmin:someSecretPassword@mongodb:27017/caddymanager?authSource=admin
-      - CORS_ORIGIN=http://caddy:5173
+      #- CORS_ORIGIN=http://caddy:5173
+      - CORS_ORIGIN=*
       - LOG_LEVEL=debug
       - DEFAULT_CADDY_ADMIN_USER=fiap
       - DEFAULT_CADDY_ADMIN_PASSWORD=fiap
