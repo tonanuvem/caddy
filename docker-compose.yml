@@ -2,9 +2,9 @@ services:
   caddy:
     image: lucaslorentz/caddy-docker-proxy:ci-alpine
     ports:
-      - 8080:80
-      - 8443:443/tcp
-      - 8443:443/udp
+      - 80:80
+      - 443:443/tcp
+      - 443:443/udp
     environment:
       - CADDY_INGRESS_NETWORKS=caddymanager
     networks:
