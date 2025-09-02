@@ -19,6 +19,9 @@ services:
       - caddy_data:/data
       - caddy_config:/config
     restart: unless-stopped
+    labels:
+      caddy: admin.fiapaws2.aluno.lab.tonanuvem.com
+      caddy.reverse_proxy: "{{upstreams 2019}}"
 
 ###### Exemplo Labels
 
@@ -27,7 +30,7 @@ services:
     networks:
       - caddymanager
     labels:
-      caddy: page.vm.aluno.lab.tonanuvem.com
+      caddy: page.fiapaws2.aluno.lab.tonanuvem.com
       caddy.reverse_proxy: "{{upstreams 80}}"
 
 ###### Caddy UI
@@ -41,6 +44,9 @@ services:
     networks:
       - caddymanager
     restart: unless-stopped
+    labels:
+      caddy: ui.fiapaws2.aluno.lab.tonanuvem.com
+      caddy.reverse_proxy: "{{upstreams 8000}}"
       
 ###### Caddy Manager
 
@@ -52,8 +58,8 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=mongoadmin
       - MONGO_INITDB_ROOT_PASSWORD=someSecretPassword  # Change for production!
-    ports:
-      - "27017:27017"  # Expose for local dev, remove for production
+    #ports:
+    #  - "27017:27017"  # Expose for local dev, remove for production
     volumes:
       - mongodb_data:/data/db
     networks:
@@ -85,6 +91,9 @@ services:
       - "3000:3000"  # Expose API
     networks:
       - caddymanager
+    labels:
+      caddy: backend.fiapaws2.aluno.lab.tonanuvem.com
+      caddy.reverse_proxy: "{{upstreams 3000}}"
 
   # Frontend web UI
   frontend:
@@ -101,6 +110,9 @@ services:
       - "8888:80"  # Expose web UI
     networks:
       - caddymanager
+    labels:
+      caddy: frontend.fiapaws2.aluno.lab.tonanuvem.com
+      caddy.reverse_proxy: "{{upstreams 80}}"
 
 networks:
   caddymanager:
