@@ -1,21 +1,32 @@
+#!/bin/bash
+
 # --- Variáveis de Configuração ---
-# Substitua 'SENHA' pela sua chave de API, se for diferente.
-API_KEY="SENHA"
-# URL base da sua API Gateway.
-API_URL="https:/api.lab.aluno.tonanuvem.com"
-# URLs completas para os endpoints.
+API_KEY="aluno"
+API_URL="https://api.lab.aluno.tonanuvem.com"
 REGISTROS_URL="$API_URL/registros"
-INFO_URL="$API_URL/info"
-# Cria um subdomínio único usando a data e hora atuais.
-# Isso evita que o teste falhe se você rodar o script várias vezes.
-#SUBDOMINIO="teste-api-$(date +%s)"
 
+DOMINIO_BASE="aluno.lab.tonanuvem.com"
 SUBDOMINIO="INSERIRseuNOME"
-ENDERECO_IP=$(curl checkip.amazonaws.com)
+ENDERECO_IP=$(curl -s checkip.amazonaws.com)
 
-# --- JSON para o teste de POST ---
-# O 'heredoc' (<<EOF) permite definir um bloco de texto JSON no próprio script.
-# A variável "$SUBDOMINIO" é expandida para o valor único que criamos acima.
+# Obter o account_id da AWS (ou perguntar o login)
+ACCOUNT_ID=$(aws sts get-caller-identity --output text 2>/dev/null | cut -f1)
+if [ -z "$ACCOUNT_ID" ]; then
+    echo "Não foi possível obter o account_id da AWS. Verifique suas credenciais."
+    echo "Digite seu LOGIN (usado como subdomínio base):"
+    read ACCOUNT_ID
+fi
+
+SUBDOMINIO="$ACCOUNT_ID.$DOMINIO_BASE"
+
+echo ""
+echo " SUBDOMINIO: $SUBDOMINIO"
+echo ""
+
+# --- Subdomínios a serem criados ---
+SUBS=(admin page ui backend frontend)
+
+# --- POST para o subdomínio raiz (sem prefixo) ---
 read -r -d '' JSON_DATA <<EOF
 {
   "subdominio": "$SUBDOMINIO",
@@ -23,12 +34,30 @@ read -r -d '' JSON_DATA <<EOF
 }
 EOF
 
-# --- Teste POST /registros ---
-# Comando curl:
-# -X POST: Define o método HTTP como POST.
-# -H "Content-Type: application/json": Informa que o corpo da requisição é JSON.
-# -d "$JSON_DATA": Envia o conteúdo da nossa variável 'JSON_DATA' no corpo da requisição.
-echo "=> Testando POST /registros..."
-echo "JSON a ser enviado: "
+echo "=> POST /registros para $SUBDOMINIO..."
+echo "JSON a ser enviado:"
 echo "$JSON_DATA"
-curl -s -i -X POST -H "Content-Type: application/json" -H "X-API-Key: $API_KEY" -d "$JSON_DATA" "$REGISTROS_URL"
+curl -s -i -X POST -H "Content-Type: application/json" \
+     -H "X-API-Key: $API_KEY" \
+     -d "$JSON_DATA" "$REGISTROS_URL"
+
+# --- Loop para os subdomínios (admin, etc) ---
+for PREFIX in "${SUBS[@]}"; do
+  SUB="$PREFIX.$SUBDOMINIO"
+  
+  read -r -d '' JSON_DATA <<EOF
+{
+  "subdominio": "$SUB",
+  "endereco_ip": "$ENDERECO_IP"
+}
+EOF
+
+  echo
+  echo "=> POST /registros para $SUB..."
+  echo "JSON a ser enviado:"
+  echo "$JSON_DATA"
+  
+  curl -s -i -X POST -H "Content-Type: application/json" \
+       -H "X-API-Key: $API_KEY" \
+       -d "$JSON_DATA" "$REGISTROS_URL"
+done
