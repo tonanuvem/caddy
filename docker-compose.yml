@@ -10,7 +10,7 @@ services:
       - 443:443/udp
       - 2019:2019/tcp
     environment:
-      - CADDY_ADMIN=0.0.0.0:2019
+      #- CADDY_ADMIN=0.0.0.0:2019
       - CADDY_INGRESS_NETWORKS=caddymanager
     networks:
       - caddymanager
@@ -30,7 +30,7 @@ services:
       caddy: page.vm.aluno.lab.tonanuvem.com
       caddy.reverse_proxy: "{{upstreams 80}}"
 
-###### Caddy Manager
+###### Caddy UI
 
   caddy-ui:
     image: qmcgaw/caddy-ui
