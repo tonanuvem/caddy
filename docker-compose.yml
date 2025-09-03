@@ -80,8 +80,8 @@ services:
       #- CORS_ORIGIN=http://caddy:5173
       - CORS_ORIGIN=*
       - LOG_LEVEL=debug
-      - DEFAULT_CADDY_ADMIN_USER=fiap
-      - DEFAULT_CADDY_ADMIN_PASSWORD=fiap
+      - DEFAULT_CADDY_ADMIN_USER=admin
+      - DEFAULT_CADDY_ADMIN_PASSWORD=caddyrocks
       - CADDY_SANDBOX_URL=http://caddy:2019
       - PING_INTERVAL=30000
       - PING_TIMEOUT=2000
