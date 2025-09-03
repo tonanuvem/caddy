@@ -2,7 +2,8 @@
 
 # --- Variáveis de Configuração ---
 API_KEY="aluno"
-API_URL="https://api.lab.aluno.tonanuvem.com"
+#API_URL="https://api.lab.aluno.tonanuvem.com"
+API_URL="https://ci3tsdwl01.execute-api.us-east-1.amazonaws.com/prod/"
 REGISTROS_URL="$API_URL/registros"
 
 DOMINIO_BASE="aluno.lab.tonanuvem.com"
