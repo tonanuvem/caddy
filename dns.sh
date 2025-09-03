@@ -18,7 +18,8 @@ if [ -z "$ACCOUNT_ID" ]; then
     read ACCOUNT_ID
 fi
 
-SUBDOMINIO="$ACCOUNT_ID.$DOMINIO_BASE"
+SUBDOMINIO="$ACCOUNT_ID"
+#SUBDOMINIO="$ACCOUNT_ID.$DOMINIO_BASE"
 
 echo ""
 echo " SUBDOMINIO: $SUBDOMINIO"
@@ -30,7 +31,7 @@ SUBS=(admin page ui backend frontend)
 # --- POST para o subdomínio raiz (sem prefixo) ---
 read -r -d '' JSON_DATA <<EOF
 {
-  "subdominio": "$SUBDOMINIO",
+  "alias": "$SUBDOMINIO",
   "endereco_ip": "$ENDERECO_IP"
 }
 EOF
@@ -48,7 +49,7 @@ for PREFIX in "${SUBS[@]}"; do
   
   read -r -d '' JSON_DATA <<EOF
 {
-  "subdominio": "$SUB",
+  "alias": "$SUB",
   "endereco_ip": "$ENDERECO_IP"
 }
 EOF
