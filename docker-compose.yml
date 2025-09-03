@@ -32,7 +32,7 @@ services:
     labels:
       caddy: page.fiapaws2.aluno.lab.tonanuvem.com
       caddy.reverse_proxy: "{{upstreams 80}}"
-      caddy_ingress_network: "brigde"
+      caddy_ingress_network: "caddy_caddymanager"
 
 ###### Caddy UI
 
