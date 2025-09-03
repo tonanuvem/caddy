@@ -62,3 +62,9 @@ EOF
        -H "X-API-Key: $API_KEY" \
        -d "$JSON_DATA" "$REGISTROS_URL"
 done
+
+echo "=> GET /registros para $SUBDOMINIO..."
+echo "Verificando registros existentes:"
+echo ""
+curl -s -i -X GET -H "Content-Type: application/json" -H "X-API-Key: $API_KEY" "$REGISTROS_URL"
+echo ""
