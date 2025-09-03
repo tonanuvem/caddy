@@ -11,7 +11,7 @@ services:
       - 2019:2019/tcp
     environment:
       #- CADDY_ADMIN=0.0.0.0:2019
-      - CADDY_INGRESS_NETWORKS=caddymanager
+      - CADDY_INGRESS_NETWORKS=caddy_caddymanager
     networks:
       - caddymanager
     volumes:
@@ -32,6 +32,7 @@ services:
     labels:
       caddy: page.fiapaws2.aluno.lab.tonanuvem.com
       caddy.reverse_proxy: "{{upstreams 80}}"
+      caddy_ingress_network: "brigde"
 
 ###### Caddy UI
 
@@ -116,6 +117,7 @@ services:
 
 networks:
   caddymanager:
+    name: caddy_caddymanager
     driver: bridge
 
 volumes:
