@@ -11,7 +11,7 @@ SUBDOMINIO="INSERIRseuNOME"
 ENDERECO_IP=$(curl -s checkip.amazonaws.com)
 
 # Obter o account_id da AWS (ou perguntar o login)
-ACCOUNT_ID=$(aws sts get-caller-identity --output text 2>/dev/null | cut -f1)
+ACCOUNT_ID=$(aws sts get-caller-identity --output text | awk -F'=' '{print $NF}' | awk -F'@' '{print $1}')
 if [ -z "$ACCOUNT_ID" ]; then
     echo "Não foi possível obter o account_id da AWS. Verifique suas credenciais."
     echo "Digite seu LOGIN (usado como subdomínio base):"
