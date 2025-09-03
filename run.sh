@@ -20,7 +20,7 @@ docker-compose up -d
 
 IP=$(curl -s checkip.amazonaws.com)
 echo "Aguardando RUNNING (geralmente 1 min)"
-while [ "$(docker logs caddy-caddy-1 2>&1 | grep running | wc -l)" != "2" ]; do
+while [ "$(docker logs caddy-caddy-1 2>&1 | grep -i running | wc -l)" -eq "0" ]; do
   printf "."
   sleep 1
 done
