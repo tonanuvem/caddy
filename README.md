@@ -2,10 +2,12 @@
 
 ## Como executar:
 
-- Passo 1
+### Passo 1
+
 > sh dns.sh
 
-- Passo 2
+### Passo 2
+
 > sh run.sh
 
 ## Fontes:
