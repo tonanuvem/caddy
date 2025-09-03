@@ -46,6 +46,6 @@ echo ""
 echo " - CADDY UI         : http://$IP:8880/"
 echo "                    : http://ui.$DOMINIO"
 echo ""
-echo " - PAGE             : 
+echo " - PAGE             : "
 echo "                    : http://page.$DOMINIO"
 echo ""
