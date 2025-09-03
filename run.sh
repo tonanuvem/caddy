@@ -33,6 +33,7 @@ curl localhost:2019/config
 
 echo "Caddy Pronto."
 echo ""
+DOMINIO="fiapaws2.aluno.lab.tonanuvem.com"
 
 echo ""
 echo ""
@@ -40,6 +41,11 @@ echo "Config OK"
 echo ""
 echo ""
 echo " - CADDY MANAGER    : http://$IP:8888/          login: fiap     senha: fiap"
+echo "                    : http://frontend.$DOMINIO"
 echo ""
-echo " - CADDY UI    : http://$IP:8880/"
+echo " - CADDY UI         : http://$IP:8880/"
+echo "                    : http://ui.$DOMINIO"
+echo ""
+echo " - PAGE             : 
+echo "                    : http://page.$DOMINIO"
 echo ""
