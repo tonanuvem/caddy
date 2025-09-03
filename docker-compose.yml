@@ -104,7 +104,8 @@ services:
     depends_on:
       - backend
     environment:
-      - API_BASE_URL=http://backend:3000/api/v1
+      - API_BASE_URL=https://backend.fiapaws2.aluno.lab.tonanuvem.com/api/v1
+      #- API_BASE_URL=http://backend:3000/api/v1
       - APP_NAME=Caddy Manager
       - DARK_MODE=true
     ports:
