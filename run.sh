@@ -6,7 +6,8 @@ echo "Todos os containers foram parados."
 
 echo ""
 echo "Parando o apache..."
-sudo systemctl stop httpd
+sudo systemctl stop httpd 
+sudo systemctl stop apache2
 echo ""
 echo "Os servicos apache/httpd foram parados."
 
