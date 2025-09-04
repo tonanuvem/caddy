@@ -26,7 +26,7 @@ services:
 ###### Exemplo Labels
 
   page:
-    image: tonanuvem/fiap_page
+    image: tonanuvem/open
     networks:
       - caddymanager
     labels:
